@@ -1,41 +1,48 @@
 ---
 title: IME 가이드
 description: 에디터 개발자를 위한 IME(입력기) 구조와 글자 조합 완벽 가이드
+head:
+  - tag: title
+    content: IME 가이드
 template: splash
+editUrl: false
 hero:
   tagline: 전 세계 입력기(IME)의 동작 원리와 브라우저별 차이점을 깊이 있게 다룹니다.
   actions:
     - text: 시작하기
       link: /guide/what-is-ime/
       icon: right-arrow
-      variant: primary
     - text: 한글 조합 원리
       link: /korean/combination/
-      variant: secondary
+      icon: right-arrow
+      variant: minimal
 ---
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components'
+import { ContainerSection } from 'starlight-theme-black/components'
+
+<ContainerSection>
 
 ## 왜 IME를 이해해야 할까요?
 
-텍스트 에디터, 채팅 앱, 폼 입력 등 **텍스트를 다루는 모든 웹 애플리케이션**은 IME와 상호작용합니다.
-한글, 일본어, 중국어 같은 언어는 여러 키 입력을 조합해 한 글자를 만들기 때문에,
-이 과정을 제대로 이해하지 못하면 **입력 버그, 글자 깨짐, UX 저하**가 발생합니다.
-
 <CardGrid stagger>
-  <Card title="IME 기초" icon="rocket">
-    IME가 무엇인지, 어떤 구조로 동작하는지 기본 개념을 배웁니다.
+  <Card title="IME 기초">
+    IME가 무엇인지, 어떤 구조로 동작하는지 기본 개념을 배웁니다. [시작하기 →](/guide/what-is-ime/)
   </Card>
-  <Card title="한글 조합" icon="pencil">
-    초성·중성·종성의 조합 원리, 2벌식/3벌식 알고리즘과 JavaScript 구현.
+  <Card title="한글 조합">
+    초성·중성·종성의 조합 원리, 2벌식/3벌식 알고리즘과 JavaScript 구현. [한글 →](/korean/combination/)
   </Card>
-  <Card title="브라우저 차이" icon="warning">
-    Safari, Chrome, Firefox 등 브라우저별로 다른 IME 동작 정리.
+  <Card title="브라우저 차이">
+    Safari, Chrome, Firefox 등 브라우저별로 다른 IME 동작 정리. [참고 →](/reference/browser-platform-quirks/)
   </Card>
-  <Card title="에디터 구현" icon="setting">
-    contenteditable, React, ProseMirror에서 IME 처리 코드 예시.
+  <Card title="에디터 구현">
+    contenteditable, React, ProseMirror에서 IME 처리 코드 예시. [에디터 →](/editor/implementation-notes/)
   </Card>
 </CardGrid>
+
+</ContainerSection>
+
+<ContainerSection>
 
 ## 언어별 가이드
 
@@ -62,6 +69,10 @@ import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
   />
 </CardGrid>
 
+</ContainerSection>
+
+<ContainerSection>
+
 ## 핵심 레퍼런스
 
 <CardGrid>
@@ -86,3 +97,5 @@ import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
     href="/reference/glossary/"
   />
 </CardGrid>
+
+</ContainerSection>
