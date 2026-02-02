@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import mermaid from 'astro-mermaid';
+import starlightThemeBlack from 'starlight-theme-black';
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,14 +11,17 @@ export default defineConfig({
 	integrations: [
 		mermaid({ autoTheme: true }),
 		starlight({
+			plugins: [
+				starlightThemeBlack({
+					navLinks: [
+						{ label: '가이드', link: '/guide/what-is-ime' },
+						{ label: '한글', link: '/korean/combination' },
+						{ label: '참고', link: '/reference/browser-platform-quirks' },
+					],
+				}),
+			],
 			title: 'IME 가이드',
 			description: '에디터 개발 시 필요한 IME(입력기) 구조와 글자 조합 가이드',
-			logo: {
-				light: './src/assets/logo-light.svg',
-				dark: './src/assets/logo-dark.svg',
-				replacesTitle: false,
-			},
-			customCss: ['./src/styles/custom.css'],
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/easylogic/ime' }],
 			head: [
 				{

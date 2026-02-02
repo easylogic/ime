@@ -11,6 +11,12 @@ importers:
       '@astrojs/starlight':
         specifier: ^0.37.6
         version: 0.37.6(astro@5.17.1(rollup@4.57.1)(typescript@5.9.3))
+      '@fontsource/geist-mono':
+        specifier: ^5.2.7
+        version: 5.2.7
+      '@fontsource/geist-sans':
+        specifier: ^5.2.5
+        version: 5.2.5
       astro:
         specifier: ^5.6.1
         version: 5.17.1(rollup@4.57.1)(typescript@5.9.3)
@@ -23,6 +29,9 @@ importers:
       sharp:
         specifier: ^0.34.2
         version: 0.34.5
+      starlight-theme-black:
+        specifier: ^0.6.0
+        version: 0.6.0(@astrojs/starlight@0.37.6(astro@5.17.1(rollup@4.57.1)(typescript@5.9.3)))
 
 packages:
 
@@ -277,6 +286,12 @@ packages:
 
   '@expressive-code/plugin-text-markers@0.41.6':
     resolution: {integrity: sha512-PBFa1wGyYzRExMDzBmAWC6/kdfG1oLn4pLpBeTfIRrALPjcGA/59HP3e7q9J0Smk4pC7U+lWkA2LHR8FYV8U7Q==}
+
+  '@fontsource/geist-mono@5.2.7':
+    resolution: {integrity: sha512-xVPVFISJg/K0VVd+aQN0Y7X/sw9hUcJPyDWFJ5GpyU3bHELhoRsJkPSRSHXW32mOi0xZCUQDOaPj1sqIFJ1FGg==}
+
+  '@fontsource/geist-sans@5.2.5':
+    resolution: {integrity: sha512-anllOHyJbElRs9fV15TeDRqAeb1IKm4bSknPl6ZMoyPTx1BBy7logudcUwpNjmQLkzn4Q0JGQLRCUKJYoyST6A==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -1481,6 +1496,11 @@ packages:
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
 
+  marked@15.0.12:
+    resolution: {integrity: sha512-8dD6FusOQSrpv9Z1rdNMdlSgQOIP880DHqnohobOmYLElGEqAL/JvxvuxZO16r4HtjTlfPRDC1hbvxC9dPN2nA==}
+    engines: {node: '>= 18'}
+    hasBin: true
+
   marked@16.4.2:
     resolution: {integrity: sha512-TI3V8YYWvkVf3KJe1dRkpnjs68JUPyEa5vjKrp1XEEJUAOaQc+Qj+L1qWbPd0SJuAdQkFU0h73sXXqwDYxsiDA==}
     engines: {node: '>= 20'}
@@ -1926,6 +1946,11 @@ packages:
 
   space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
+
+  starlight-theme-black@0.6.0:
+    resolution: {integrity: sha512-SoYAlyFEyRizcxQXd1ibfAGytmI5gVbSBReK25YFeASI51YwdB9bQtmp14/d70KgfD6kD7SRidhOrPBMD4S3AA==}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.30.0'
 
   stream-replace-string@2.0.0:
     resolution: {integrity: sha512-TlnjJ1C0QrmxRNrON00JvaFFlNh5TTG00APw23j74ET7gkQpTASi6/L2fuiav8pzK715HXtUeClpBTw2NPSn6w==}
@@ -2507,6 +2532,10 @@ snapshots:
   '@expressive-code/plugin-text-markers@0.41.6':
     dependencies:
       '@expressive-code/core': 0.41.6
+
+  '@fontsource/geist-mono@5.2.7': {}
+
+  '@fontsource/geist-sans@5.2.5': {}
 
   '@iconify/types@2.0.0': {}
 
@@ -3887,6 +3916,8 @@ snapshots:
 
   markdown-table@3.0.4: {}
 
+  marked@15.0.12: {}
+
   marked@16.4.2: {}
 
   mdast-util-definitions@6.0.0:
@@ -4786,6 +4817,14 @@ snapshots:
   source-map@0.7.6: {}
 
   space-separated-tokens@2.0.2: {}
+
+  starlight-theme-black@0.6.0(@astrojs/starlight@0.37.6(astro@5.17.1(rollup@4.57.1)(typescript@5.9.3))):
+    dependencies:
+      '@astrojs/starlight': 0.37.6(astro@5.17.1(rollup@4.57.1)(typescript@5.9.3))
+      '@fontsource/geist-mono': 5.2.7
+      '@fontsource/geist-sans': 5.2.5
+      '@pagefind/default-ui': 1.4.0
+      marked: 15.0.12
 
   stream-replace-string@2.0.0: {}
 
