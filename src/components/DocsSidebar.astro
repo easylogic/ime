@@ -110,8 +110,14 @@ function isActive(href: string): boolean {
 }
 ---
 
-<aside class="docs-sidebar">
-  <nav class="sidebar-nav">
+<aside class="docs-sidebar" aria-label="Documentation">
+  <div class="docs-sidebar-header">
+    <div class="docs-sidebar-title">
+      <span class="font-semibold">문서</span>
+      <a href="/" class="docs-home-link">홈 →</a>
+    </div>
+  </div>
+  <nav class="sidebar-nav" aria-label="Documentation pages">
     {sidebarGroups.map((group) => (
       <div class="sidebar-group">
         <h3 class="sidebar-group-title" style={group.color ? `border-left-color: ${group.color}` : ''}>
@@ -137,33 +143,57 @@ function isActive(href: string): boolean {
 <style>
   .docs-sidebar {
     position: sticky;
-    top: 68px;
-    width: var(--sidebar-width);
-    height: calc(100vh - 68px);
+    top: 0;
+    width: 240px;
+    min-width: 240px;
+    height: 100vh;
     overflow-y: auto;
-    padding: 1.5rem 0;
+    padding: 0;
     border-right: 1px solid var(--border-light);
-    background: var(--bg-surface);
+    background: var(--bg-muted);
     flex-shrink: 0;
   }
 
+  .docs-sidebar-header {
+    padding: 1rem 0.75rem;
+    border-bottom: 1px solid var(--border-light);
+    background: var(--bg-surface);
+  }
+
+  .docs-sidebar-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+  }
+
+  .docs-home-link {
+    font-size: 0.75rem;
+    color: var(--accent-primary);
+    text-decoration: none;
+  }
+
+  .docs-home-link:hover {
+    text-decoration: underline;
+  }
+
   .sidebar-nav {
-    padding: 0 1rem;
+    padding: 0.5rem 0;
   }
 
   .sidebar-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .sidebar-group-title {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-muted);
-    margin: 0 0 0.5rem;
-    padding: 0.25rem 0 0.25rem 0.75rem;
-    border-left: 3px solid var(--border-medium);
+    margin: 0;
+    padding: 0.5rem 0.75rem 0.25rem;
+    border-left: 3px solid transparent;
   }
 
   .sidebar-items {
@@ -175,23 +205,24 @@ function isActive(href: string): boolean {
   .sidebar-item {
     display: block;
     padding: 0.4rem 0.75rem;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
+    font-size: 0.875rem;
+    color: var(--text-primary);
     text-decoration: none;
-    border-radius: 6px;
-    transition: all 0.15s;
-    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-left: 3px solid transparent;
+    transition: background-color 0.15s, color 0.15s;
   }
 
   .sidebar-item:hover {
-    color: var(--text-primary);
-    background: var(--bg-muted);
+    background-color: var(--bg-surface);
   }
 
   .sidebar-item.active {
-    color: var(--accent-primary);
-    background: var(--accent-primary-light);
-    font-weight: 500;
+    background-color: var(--accent-primary);
+    color: white;
+    border-left-color: var(--accent-primary);
   }
 
   /* Custom scrollbar */
