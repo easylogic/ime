@@ -1,0 +1,116 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const {
+  title,
+  description = '에디터 개발 시 필요한 IME(입력기) 구조와 글자 조합 가이드. 한글, 일본어, 중국어 등 다양한 언어의 IME 동작 원리를 설명합니다.',
+  image = '/og-image.svg',
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+const fullTitle = title.includes('IME')
+  ? title
+  : `${title} | IME 가이드`;
+
+const imageURL = new URL(image, Astro.site);
+---
+
+<!-- Primary Meta Tags -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
+<meta name="generator" content={Astro.generator} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="canonical" href={canonicalURL} />
+
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
+
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageURL} />
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:site_name" content="IME 가이드" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalURL} />
+<meta property="twitter:title" content={fullTitle} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={imageURL} />
+
+<!-- Theme -->
+<meta name="theme-color" content="#0066ff" />
+<meta name="color-scheme" content="light dark" />
+
+<!-- Code copy button script -->
+<script>
+  function initCodeCopy() {
+    document.querySelectorAll('pre').forEach((pre) => {
+      if (pre.querySelector('.code-copy-btn')) return;
+      
+      let wrapper = pre.parentElement;
+      if (!wrapper?.classList.contains('code-block-wrapper')) {
+        wrapper = document.createElement('div');
+        wrapper.className = 'code-block-wrapper';
+        pre.parentNode?.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+      }
+      
+      const btn = document.createElement('button');
+      btn.className = 'code-copy-btn';
+      btn.setAttribute('aria-label', 'Copy code');
+      btn.innerHTML = `
+        <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <svg class="check-icon" style="display:none" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      `;
+      
+      btn.addEventListener('click', async () => {
+        const code = pre.textContent || '';
+        
+        try {
+          await navigator.clipboard.writeText(code);
+          btn.classList.add('copied');
+          btn.querySelector('.copy-icon')?.setAttribute('style', 'display: none;');
+          btn.querySelector('.check-icon')?.setAttribute('style', 'display: block;');
+          
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.querySelector('.copy-icon')?.setAttribute('style', '');
+            btn.querySelector('.check-icon')?.setAttribute('style', 'display: none;');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
+      });
+      
+      wrapper.style.position = 'relative';
+      wrapper.appendChild(btn);
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCodeCopy);
+  } else {
+    initCodeCopy();
+  }
+</script>

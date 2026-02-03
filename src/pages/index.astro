@@ -1,0 +1,748 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const siteTitle = 'IME 가이드';
+
+// Statistics
+const stats = {
+  languages: 5,
+  topics: 40,
+  codeExamples: 20,
+};
+
+// Language guides
+const languageGuides = [
+  {
+    title: '한글',
+    description: '초성·중성·종성 조합, 2벌식/3벌식 알고리즘',
+    href: '/docs/korean/combination',
+    color: 'var(--category-korean)',
+    bgGradient: 'linear-gradient(135deg, #ede9fe, #fae8ff)',
+    icon: '🇰🇷',
+  },
+  {
+    title: '일본어',
+    description: '히라가나·가타카나 변환, 로마자 입력',
+    href: '/docs/japanese/combination',
+    color: 'var(--category-japanese)',
+    bgGradient: 'linear-gradient(135deg, #fce7f3, #fce7f3)',
+    icon: '🇯🇵',
+  },
+  {
+    title: '중국어',
+    description: '병음, 주음, 창힐 입력 방식',
+    href: '/docs/chinese/combination',
+    color: 'var(--category-chinese)',
+    bgGradient: 'linear-gradient(135deg, #ffedd5, #fef3c7)',
+    icon: '🇨🇳',
+  },
+  {
+    title: '아랍어',
+    description: 'RTL 처리, 문맥 의존 글리프',
+    href: '/docs/arabic/combination',
+    color: 'var(--category-arabic)',
+    bgGradient: 'linear-gradient(135deg, #ccfbf1, #d1fae5)',
+    icon: '🇸🇦',
+  },
+  {
+    title: '유럽권',
+    description: '데드키, 악센트 문자 입력',
+    href: '/docs/european/combination',
+    color: 'var(--category-european)',
+    bgGradient: 'linear-gradient(135deg, #cffafe, #e0f2fe)',
+    icon: '🇪🇺',
+  },
+];
+
+// Quick links
+const quickLinks = [
+  {
+    title: '가이드',
+    description: 'IME 기초 개념부터 시작하기',
+    href: '/docs/guide/what-is-ime',
+    icon: '📚',
+    count: '5개 문서',
+  },
+  {
+    title: '참고 자료',
+    description: '브라우저별 차이, inputType 상세',
+    href: '/docs/reference/browser-platform-quirks',
+    icon: '📋',
+    count: '11개 문서',
+  },
+  {
+    title: '에디터 구현',
+    description: 'IME 처리 코드 예시',
+    href: '/docs/editor/implementation-notes',
+    icon: '🛠️',
+    count: '2개 문서',
+  },
+];
+
+// Featured topics
+const featuredTopics = [
+  { label: '한글 조합', href: '/docs/korean/combination', color: 'var(--category-korean)' },
+  { label: '2벌식', href: '/docs/korean/2-set-algorithm', color: 'var(--category-korean)' },
+  { label: 'inputType', href: '/docs/reference/inputtype', color: 'var(--category-reference)' },
+  { label: 'composition 이벤트', href: '/docs/reference/composition-events-by-ime', color: 'var(--category-reference)' },
+  { label: 'isComposing', href: '/docs/reference/is-composing', color: 'var(--category-reference)' },
+  { label: '브라우저 차이', href: '/docs/reference/browser-platform-quirks', color: 'var(--category-reference)' },
+  { label: 'libhangul', href: '/docs/korean/libhangul-api', color: 'var(--category-korean)' },
+  { label: '트러블슈팅', href: '/docs/reference/troubleshooting', color: 'var(--category-reference)' },
+];
+---
+
+<html lang="ko">
+  <head>
+    <BaseHead title={siteTitle} />
+  </head>
+  <body>
+    <SiteNav />
+    <main class="max-w-[1280px] mx-auto px-8 py-8 pb-12">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span>⌨️</span>
+            <span>에디터 개발자를 위한 IME 가이드</span>
+          </div>
+          <h1 class="hero-title">
+            IME<span class="hero-dot">.</span>guide
+          </h1>
+          <p class="hero-description">
+            전 세계 입력기(IME)의 동작 원리와 브라우저별 차이점을 깊이 있게 다룹니다.
+            한글, 일본어, 중국어 등 다양한 언어의 글자 조합 과정과 
+            에디터 구현 시 알아야 할 핵심 지식을 제공합니다.
+          </p>
+          <div class="hero-actions">
+            <a href="/docs/guide/what-is-ime" class="btn-primary">
+              시작하기
+              <span>→</span>
+            </a>
+            <a href="/docs/korean/combination" class="btn-outline">
+              한글 조합 원리
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span>✓</span>
+              <span>{stats.languages}개 언어</span>
+            </div>
+            <div class="hero-stat">
+              <span>📄</span>
+              <span>{stats.topics}+ 문서</span>
+            </div>
+            <div class="hero-stat">
+              <span>💻</span>
+              <span>{stats.codeExamples}+ 코드 예제</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats Grid -->
+      <section class="stats-section">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--category-korean);">한글</div>
+            <div class="stat-label">초성·중성·종성 조합</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--category-japanese);">日本語</div>
+            <div class="stat-label">히라가나·가타카나</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--category-chinese);">中文</div>
+            <div class="stat-label">병음·주음 입력</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--category-arabic);">العربية</div>
+            <div class="stat-label">RTL·문맥 의존</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--category-european);">Ëuropé</div>
+            <div class="stat-label">데드키·악센트</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color: var(--accent-primary);">Browser</div>
+            <div class="stat-label">브라우저별 차이</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Language Guides Section -->
+      <section class="section-card">
+        <div class="section-header">
+          <div class="section-icon">🌏</div>
+          <div>
+            <h2 class="section-title">언어별 가이드</h2>
+            <p class="section-desc">각 언어의 글자 조합 원리와 IME 동작 방식을 설명합니다.</p>
+          </div>
+        </div>
+
+        <div class="language-grid">
+          {languageGuides.map((guide) => (
+            <a href={guide.href} class="language-card" style={`background: ${guide.bgGradient};`}>
+              <span class="language-icon">{guide.icon}</span>
+              <div class="language-info">
+                <h3 class="language-title">{guide.title}</h3>
+                <p class="language-desc">{guide.description}</p>
+              </div>
+              <span class="language-arrow">→</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Quick Links Section -->
+      <section class="section-card">
+        <div class="section-header">
+          <div class="section-icon">⚡</div>
+          <div>
+            <h2 class="section-title">빠른 링크</h2>
+            <p class="section-desc">자주 찾는 섹션으로 바로 이동하세요.</p>
+          </div>
+        </div>
+
+        <div class="quick-links-grid">
+          {quickLinks.map((link) => (
+            <a href={link.href} class="quick-link-card">
+              <span class="quick-link-icon">{link.icon}</span>
+              <div class="quick-link-info">
+                <h3 class="quick-link-title">{link.title}</h3>
+                <p class="quick-link-desc">{link.description}</p>
+                <span class="quick-link-count">{link.count}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Featured Topics Section -->
+      <section class="section-card">
+        <div class="section-header">
+          <div class="section-icon">🏷️</div>
+          <div>
+            <h2 class="section-title">주요 토픽</h2>
+            <p class="section-desc">많이 참조되는 주제들을 빠르게 확인하세요.</p>
+          </div>
+        </div>
+
+        <div class="topics-grid">
+          {featuredTopics.map((topic) => (
+            <a 
+              href={topic.href} 
+              class="topic-tag"
+              style={`background: color-mix(in srgb, ${topic.color} 12%, white); color: ${topic.color}; border: 1px solid color-mix(in srgb, ${topic.color} 25%, transparent);`}
+            >
+              {topic.label}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- Why IME Section -->
+      <section class="section-card highlight">
+        <div class="section-header">
+          <div class="section-icon">💡</div>
+          <div>
+            <h2 class="section-title">왜 IME를 이해해야 할까요?</h2>
+            <p class="section-desc">에디터를 개발할 때 IME 지식이 필요한 이유</p>
+          </div>
+        </div>
+
+        <div class="reason-grid">
+          <div class="reason-card">
+            <h3>🌍 다국어 지원</h3>
+            <p>한글, 일본어, 중국어 등 비-라틴 문자를 제대로 지원하려면 IME 동작 방식을 알아야 합니다.</p>
+          </div>
+          <div class="reason-card">
+            <h3>🔧 버그 예방</h3>
+            <p>composition 이벤트를 제대로 처리하지 않으면 글자가 중복되거나 사라지는 버그가 발생합니다.</p>
+          </div>
+          <div class="reason-card">
+            <h3>🌐 브라우저 호환</h3>
+            <p>Safari, Chrome, Firefox마다 IME 동작이 다릅니다. 차이점을 알면 크로스 브라우저 이슈를 해결할 수 있습니다.</p>
+          </div>
+          <div class="reason-card">
+            <h3>📱 모바일 대응</h3>
+            <p>모바일 키보드의 자동완성, 스와이프 입력 등도 IME의 일종입니다. 이를 이해해야 모바일 에디터를 만들 수 있습니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Community Section -->
+      <section class="section-card community">
+        <div class="section-header">
+          <div class="section-icon">💬</div>
+          <div>
+            <h2 class="section-title">오픈소스 프로젝트</h2>
+            <p class="section-desc">이 가이드는 오픈소스로 운영됩니다. 기여를 환영합니다!</p>
+          </div>
+        </div>
+
+        <div class="community-grid">
+          <a href="https://github.com/easylogic/ime" target="_blank" rel="noopener noreferrer" class="community-card">
+            <div class="community-icon">⭐</div>
+            <h3>GitHub Star</h3>
+            <p>프로젝트에 스타를 눌러 응원해주세요</p>
+          </a>
+          <a href="https://github.com/easylogic/ime/issues" target="_blank" rel="noopener noreferrer" class="community-card">
+            <div class="community-icon">🐛</div>
+            <h3>이슈 제보</h3>
+            <p>버그나 개선점을 알려주세요</p>
+          </a>
+          <a href="https://github.com/easylogic/ime/pulls" target="_blank" rel="noopener noreferrer" class="community-card">
+            <div class="community-icon">🤝</div>
+            <h3>기여하기</h3>
+            <p>문서 개선에 참여해주세요</p>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </body>
+</html>
+
+<style>
+  /* Hero Section */
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    margin-bottom: 2.5rem;
+    border-radius: 24px;
+    border: 1px solid var(--border-light);
+    background: var(--hero-gradient);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    margin: 0 0 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-dot {
+    color: var(--accent-primary);
+  }
+
+  .hero-description {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    background: var(--accent-primary);
+    color: white;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 102, 255, 0.3);
+    color: white;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.875rem 1.75rem;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border-medium);
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .hero-stat {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .stat-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* Section Cards */
+  .section-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-card.highlight {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.03), rgba(139, 92, 246, 0.03));
+  }
+
+  .section-card.community {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.05), rgba(255, 107, 53, 0.05));
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-icon {
+    font-size: 1.75rem;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-muted);
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+  }
+
+  .section-desc {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Language Grid */
+  .language-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .language-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .language-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .language-icon {
+    font-size: 1.5rem;
+  }
+
+  .language-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .language-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.125rem;
+  }
+
+  .language-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .language-arrow {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    transition: transform 0.2s;
+  }
+
+  .language-card:hover .language-arrow {
+    transform: translateX(4px);
+    color: var(--accent-primary);
+  }
+
+  /* Quick Links Grid */
+  .quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .quick-link-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--bg-muted);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .quick-link-card:hover {
+    border-color: var(--accent-primary);
+    background: var(--accent-primary-light);
+  }
+
+  .quick-link-icon {
+    font-size: 1.5rem;
+  }
+
+  .quick-link-info {
+    flex: 1;
+  }
+
+  .quick-link-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.25rem;
+  }
+
+  .quick-link-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0 0 0.375rem;
+  }
+
+  .quick-link-count {
+    font-size: 0.7rem;
+    color: var(--text-faint);
+  }
+
+  /* Topics Grid */
+  .topics-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .topic-tag {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .topic-tag:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Reason Grid */
+  .reason-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .reason-card {
+    padding: 1rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+  }
+
+  .reason-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+
+  .reason-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Community Grid */
+  .community-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .community-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .community-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .community-icon {
+    font-size: 1.5rem;
+  }
+
+  .community-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .community-card p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .stats-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 2.5rem 1rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+    }
+
+    .hero-stats {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quick-links-grid,
+    .reason-grid,
+    .community-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .language-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

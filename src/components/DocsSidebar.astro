@@ -1,0 +1,220 @@
+---
+interface SidebarItem {
+  label: string;
+  href: string;
+}
+
+interface SidebarGroup {
+  title: string;
+  items: SidebarItem[];
+  color?: string;
+}
+
+const currentPath = Astro.url.pathname;
+
+const sidebarGroups: SidebarGroup[] = [
+  {
+    title: '가이드',
+    color: 'var(--category-guide)',
+    items: [
+      { label: 'IME란', href: '/docs/guide/what-is-ime' },
+      { label: 'IME 구조', href: '/docs/guide/ime-architecture' },
+      { label: '글자 조합', href: '/docs/guide/composition' },
+      { label: '글자 조합 방식·알고리즘', href: '/docs/guide/composition-algorithms' },
+      { label: '키보드/IME별 차이', href: '/docs/guide/keyboard-ime-differences' },
+    ],
+  },
+  {
+    title: '한글',
+    color: 'var(--category-korean)',
+    items: [
+      { label: '조합 원리', href: '/docs/korean/combination' },
+      { label: '조합 규칙(겹모음·겹받침)', href: '/docs/korean/combination-rules' },
+      { label: '2벌식 알고리즘', href: '/docs/korean/2-set-algorithm' },
+      { label: '3벌식 알고리즘', href: '/docs/korean/3-set-algorithm' },
+      { label: '한글 입력기', href: '/docs/korean/input-methods' },
+      { label: '모바일 한글 키보드', href: '/docs/korean/mobile-keyboard' },
+      { label: '한글 입력기 구현', href: '/docs/korean/implementation' },
+      { label: 'libhangul API', href: '/docs/korean/libhangul-api' },
+    ],
+  },
+  {
+    title: '일본어',
+    color: 'var(--category-japanese)',
+    items: [
+      { label: '조합 원리', href: '/docs/japanese/combination' },
+      { label: '일본어 입력기', href: '/docs/japanese/input-methods' },
+      { label: '모바일 일본어 키보드', href: '/docs/japanese/mobile-keyboard' },
+      { label: '일본어 입력기 구현', href: '/docs/japanese/implementation' },
+    ],
+  },
+  {
+    title: '중국어',
+    color: 'var(--category-chinese)',
+    items: [
+      { label: '조합 원리', href: '/docs/chinese/combination' },
+      { label: '중국어 입력기', href: '/docs/chinese/input-methods' },
+      { label: '모바일 중국어 키보드', href: '/docs/chinese/mobile-keyboard' },
+      { label: '중국어 입력기 구현', href: '/docs/chinese/implementation' },
+    ],
+  },
+  {
+    title: '아랍어',
+    color: 'var(--category-arabic)',
+    items: [
+      { label: '조합 원리', href: '/docs/arabic/combination' },
+      { label: '아랍어 입력기', href: '/docs/arabic/input-methods' },
+      { label: '모바일 아랍어 키보드', href: '/docs/arabic/mobile-keyboard' },
+      { label: '아랍어 입력기 구현', href: '/docs/arabic/implementation' },
+    ],
+  },
+  {
+    title: '유럽권',
+    color: 'var(--category-european)',
+    items: [
+      { label: '조합 원리', href: '/docs/european/combination' },
+      { label: '유럽권 입력기', href: '/docs/european/input-methods' },
+      { label: '모바일 유럽권 키보드', href: '/docs/european/mobile-keyboard' },
+      { label: '유럽권 입력기 구현', href: '/docs/european/implementation' },
+    ],
+  },
+  {
+    title: '참고',
+    color: 'var(--category-reference)',
+    items: [
+      { label: '브라우저·플랫폼별 IME 동작 차이', href: '/docs/reference/browser-platform-quirks' },
+      { label: 'composition 시나리오별 처리 규칙', href: '/docs/reference/composition-edge-cases' },
+      { label: 'inputType 상세', href: '/docs/reference/inputtype' },
+      { label: 'IME별 composition 이벤트', href: '/docs/reference/composition-events-by-ime' },
+      { label: '키보드·IME 조합별 차이', href: '/docs/reference/keyboard-ime-combinations' },
+      { label: 'KeyboardEvent.isComposing', href: '/docs/reference/is-composing' },
+      { label: 'IME·한글 구현 코드 예시', href: '/docs/reference/code-examples' },
+      { label: 'IME 구현 상세', href: '/docs/reference/ime-implementation-details' },
+      { label: '용어 정리', href: '/docs/reference/glossary' },
+      { label: '트러블슈팅', href: '/docs/reference/troubleshooting' },
+      { label: '기존 프로젝트 소개', href: '/docs/reference/projects' },
+    ],
+  },
+  {
+    title: '에디터 구현',
+    color: 'var(--category-editor)',
+    items: [
+      { label: '고려사항', href: '/docs/editor/implementation-notes' },
+      { label: 'IME 처리 코드 예시', href: '/docs/editor/code-examples' },
+    ],
+  },
+];
+
+function isActive(href: string): boolean {
+  return currentPath === href || currentPath === href + '/';
+}
+---
+
+<aside class="docs-sidebar">
+  <nav class="sidebar-nav">
+    {sidebarGroups.map((group) => (
+      <div class="sidebar-group">
+        <h3 class="sidebar-group-title" style={group.color ? `border-left-color: ${group.color}` : ''}>
+          {group.title}
+        </h3>
+        <ul class="sidebar-items">
+          {group.items.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={['sidebar-item', { active: isActive(item.href) }]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </nav>
+</aside>
+
+<style>
+  .docs-sidebar {
+    position: sticky;
+    top: 68px;
+    width: var(--sidebar-width);
+    height: calc(100vh - 68px);
+    overflow-y: auto;
+    padding: 1.5rem 0;
+    border-right: 1px solid var(--border-light);
+    background: var(--bg-surface);
+    flex-shrink: 0;
+  }
+
+  .sidebar-nav {
+    padding: 0 1rem;
+  }
+
+  .sidebar-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .sidebar-group-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin: 0 0 0.5rem;
+    padding: 0.25rem 0 0.25rem 0.75rem;
+    border-left: 3px solid var(--border-medium);
+  }
+
+  .sidebar-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar-item {
+    display: block;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.15s;
+    margin-bottom: 2px;
+  }
+
+  .sidebar-item:hover {
+    color: var(--text-primary);
+    background: var(--bg-muted);
+  }
+
+  .sidebar-item.active {
+    color: var(--accent-primary);
+    background: var(--accent-primary-light);
+    font-weight: 500;
+  }
+
+  /* Custom scrollbar */
+  .docs-sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .docs-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .docs-sidebar::-webkit-scrollbar-thumb {
+    background: var(--border-light);
+    border-radius: 3px;
+  }
+
+  .docs-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--border-medium);
+  }
+
+  @media (max-width: 1024px) {
+    .docs-sidebar {
+      display: none;
+    }
+  }
+</style>

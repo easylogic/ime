@@ -1,0 +1,486 @@
+/* IME Guide global styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Primary accent - vibrant blue */
+  --accent-primary: #0066ff;
+  --accent-primary-hover: #0052cc;
+  --accent-primary-light: #e6f0ff;
+  
+  /* Secondary accent - warm orange */
+  --accent-secondary: #ff6b35;
+  --accent-secondary-hover: #e55a2b;
+  --accent-secondary-light: #fff4f0;
+  
+  /* Category colors */
+  --category-korean: #8b5cf6;
+  --category-japanese: #ec4899;
+  --category-chinese: #f97316;
+  --category-arabic: #14b8a6;
+  --category-european: #06b6d4;
+  --category-guide: #10b981;
+  --category-reference: #6366f1;
+  --category-editor: #a855f7;
+  
+  /* Neutrals */
+  --bg-page: #fafafa;
+  --bg-surface: #ffffff;
+  --bg-muted: #f3f4f6;
+  --bg-nav: rgba(255, 255, 255, 0.95);
+  
+  --border-light: #e5e7eb;
+  --border-medium: #d1d5db;
+  
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-faint: #9ca3af;
+  
+  /* Gradients */
+  --hero-gradient: linear-gradient(135deg, #f0f7ff 0%, #fdf4ff 50%, #fff7ed 100%);
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  
+  /* Spacing */
+  --nav-height: 52px;
+  --sidebar-width: 260px;
+  --content-max-width: 1280px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+/* Dark mode */
+[data-theme="dark"] {
+  --bg-page: #171717;
+  --bg-surface: #262626;
+  --bg-muted: #404040;
+  --bg-nav: rgba(23, 23, 23, 0.95);
+  
+  --border-light: #404040;
+  --border-medium: #525252;
+  
+  --text-primary: #fafafa;
+  --text-secondary: #d4d4d4;
+  --text-muted: #a3a3a3;
+  --text-faint: #737373;
+  
+  --accent-primary-light: #1d4ed8;
+  --accent-secondary-light: #c2410c;
+  
+  --hero-gradient: linear-gradient(135deg, #262626 0%, #1f1f1f 50%, #171717 100%);
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* System preference dark mode */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-page: #171717;
+    --bg-surface: #262626;
+    --bg-muted: #404040;
+    --bg-nav: rgba(23, 23, 23, 0.95);
+    
+    --border-light: #404040;
+    --border-medium: #525252;
+    
+    --text-primary: #fafafa;
+    --text-secondary: #d4d4d4;
+    --text-muted: #a3a3a3;
+    --text-faint: #737373;
+    
+    --accent-primary-light: #1d4ed8;
+    --accent-secondary-light: #c2410c;
+    
+    --hero-gradient: linear-gradient(135deg, #262626 0%, #1f1f1f 50%, #171717 100%);
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Base styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Links */
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-primary-hover);
+}
+
+/* Code */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--bg-muted);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: var(--bg-muted);
+  color: var(--text-primary);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  border: 1px solid var(--border-light);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+th {
+  font-weight: 600;
+  background: var(--bg-muted);
+}
+
+/* Category tag colors */
+.tag-korean { background: #ede9fe; color: #7c3aed; }
+.tag-japanese { background: #fce7f3; color: #db2777; }
+.tag-chinese { background: #ffedd5; color: #ea580c; }
+.tag-arabic { background: #ccfbf1; color: #0d9488; }
+.tag-european { background: #cffafe; color: #0891b2; }
+.tag-guide { background: #d1fae5; color: #059669; }
+.tag-reference { background: #e0e7ff; color: #4f46e5; }
+.tag-editor { background: #f3e8ff; color: #9333ea; }
+
+[data-theme="dark"] .tag-korean { background: #2e1065; color: #c4b5fd; }
+[data-theme="dark"] .tag-japanese { background: #4a044e; color: #f9a8d4; }
+[data-theme="dark"] .tag-chinese { background: #431407; color: #fdba74; }
+[data-theme="dark"] .tag-arabic { background: #042f2e; color: #5eead4; }
+[data-theme="dark"] .tag-european { background: #083344; color: #67e8f9; }
+[data-theme="dark"] .tag-guide { background: #065f46; color: #6ee7b7; }
+[data-theme="dark"] .tag-reference { background: #1e1b4b; color: #a5b4fc; }
+[data-theme="dark"] .tag-editor { background: #3b0764; color: #d8b4fe; }
+
+/* Cards */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  border-color: var(--border-medium);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card-interactive:hover {
+  border-color: var(--accent-primary);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+}
+
+.btn-primary {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent-primary-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent-primary-light);
+  color: var(--text-primary);
+}
+
+/* Code copy button */
+.code-block-wrapper {
+  position: relative;
+}
+
+.code-copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: all 0.15s;
+  z-index: 10;
+}
+
+.code-block-wrapper:hover .code-copy-btn,
+.code-copy-btn:focus {
+  opacity: 1;
+}
+
+.code-copy-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+  background: var(--bg-muted);
+}
+
+.code-copy-btn.copied {
+  color: #10b981;
+  border-color: #10b981;
+  opacity: 1;
+}
+
+/* Markdown content styling */
+.markdown-content {
+  color: var(--text-primary);
+}
+
+.markdown-content > *:first-child {
+  margin-top: 0;
+}
+
+.markdown-content > *:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-content h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.markdown-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.markdown-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-content h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.markdown-content p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.markdown-content ul {
+  list-style-type: disc;
+}
+
+.markdown-content ol {
+  list-style-type: decimal;
+}
+
+.markdown-content li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+.markdown-content strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.markdown-content blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--accent-primary);
+  background: var(--bg-muted);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-secondary);
+}
+
+.markdown-content blockquote p {
+  margin: 0;
+}
+
+.markdown-content hr {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px solid var(--border-light);
+}
+
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9em;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.markdown-content th,
+.markdown-content td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-light);
+  text-align: left;
+}
+
+.markdown-content th {
+  background: var(--bg-muted);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.markdown-content td {
+  color: var(--text-secondary);
+}
+
+.markdown-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.markdown-content a {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.markdown-content a:hover {
+  color: var(--accent-primary-hover);
+}
+
+/* Mermaid diagrams */
+.mermaid {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .markdown-content h1 {
+    font-size: 1.75rem;
+  }
+  
+  .markdown-content h2 {
+    font-size: 1.35rem;
+  }
+  
+  .markdown-content h3 {
+    font-size: 1.15rem;
+  }
+}

@@ -1,0 +1,25 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+import { getAllDocs, getDocBySlug } from '../../utils/docs';
+
+export async function getStaticPaths() {
+  const docs = await getAllDocs();
+  return docs.map((doc) => ({
+    params: { slug: doc.slug },
+    props: { doc },
+  }));
+}
+
+const { slug } = Astro.params;
+const { doc } = Astro.props;
+
+if (!doc) {
+  return Astro.redirect('/404');
+}
+
+const { Content } = doc;
+---
+
+<DocsLayout frontmatter={doc.frontmatter} headings={doc.headings}>
+  <Content />
+</DocsLayout>
