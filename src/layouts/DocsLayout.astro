@@ -4,6 +4,7 @@ import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
 import DocsSidebar from '../components/DocsSidebar.astro';
 import TableOfContents from '../components/TableOfContents.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -15,6 +16,32 @@ interface Props {
 }
 
 const { frontmatter, headings } = Astro.props;
+
+// Build breadcrumb from URL path
+const currentPath = Astro.url.pathname;
+const pathParts = currentPath.split('/').filter(Boolean);
+const breadcrumbItems = [
+  { label: '문서', href: '/docs/guide/what-is-ime' },
+];
+
+// Map category names
+const categoryNames: Record<string, string> = {
+  guide: '가이드',
+  korean: '한글',
+  japanese: '일본어',
+  chinese: '중국어',
+  arabic: '아랍어',
+  european: '유럽권',
+  reference: '참고',
+  editor: '에디터',
+};
+
+if (pathParts.length >= 2) {
+  const category = pathParts[1];
+  if (categoryNames[category]) {
+    breadcrumbItems.push({ label: categoryNames[category] });
+  }
+}
 ---
 
 <!doctype html>
@@ -28,13 +55,14 @@ const { frontmatter, headings } = Astro.props;
       <DocsSidebar />
       <section class="docs-main">
         <article class="docs-article">
+          <Breadcrumb items={breadcrumbItems} />
           <header class="docs-header">
             <h1>{frontmatter.title}</h1>
             {frontmatter.description && (
               <p class="docs-description">{frontmatter.description}</p>
             )}
           </header>
-          <div class="docs-content-card markdown-content">
+          <div class="docs-content markdown-content">
             <slot />
           </div>
         </article>
@@ -42,7 +70,6 @@ const { frontmatter, headings } = Astro.props;
       </section>
     </main>
     <Footer />
-
   </body>
 </html>
 
@@ -53,63 +80,72 @@ const { frontmatter, headings } = Astro.props;
     max-width: 100%;
     margin: 0;
     padding: 0;
-    min-height: calc(100vh - 52px);
+    min-height: calc(100vh - var(--nav-height));
   }
 
   .docs-main {
     flex: 1;
     display: flex;
-    max-width: 1120px;
+    max-width: calc(var(--content-max-width) + var(--toc-width) + 4rem);
     margin: 0 auto;
-    padding: 1.75rem 1.25rem 2.5rem;
-    gap: 1.5rem;
+    padding: 2rem 2rem 4rem;
+    gap: 3rem;
     width: 100%;
   }
 
   .docs-article {
     flex: 1;
     min-width: 0;
+    max-width: var(--content-max-width);
   }
 
   .docs-header {
     margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-light);
   }
 
   .docs-header h1 {
-    font-size: 1.875rem;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin: 0 0 0.5rem;
-    line-height: 1.3;
+    margin: 0 0 0.75rem;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
   }
 
   .docs-description {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
+    font-size: 1.05rem;
+    color: var(--text-muted);
     margin: 0;
     line-height: 1.6;
   }
 
-  .docs-content-card {
-    border-radius: 12px;
-    border: 1px solid var(--border-light);
-    background: var(--bg-surface);
-    padding: 1.5rem 1.75rem;
+  .docs-content {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  @media (max-width: 1200px) {
+    .docs-main {
+      gap: 2rem;
+    }
   }
 
   @media (max-width: 1024px) {
     .docs-main {
-      padding: 1.25rem 1rem;
+      padding: 1.5rem 1.25rem 3rem;
     }
 
     .docs-header h1 {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
     }
   }
 
   @media (max-width: 768px) {
     .docs-main {
       padding: 1rem;
+      flex-direction: column;
     }
   }
 </style>
