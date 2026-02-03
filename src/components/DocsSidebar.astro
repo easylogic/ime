@@ -143,10 +143,10 @@ function isActive(href: string): boolean {
 <style>
   .docs-sidebar {
     position: sticky;
-    top: 0;
+    top: var(--nav-height);
     width: var(--sidebar-width);
     min-width: var(--sidebar-width);
-    height: 100vh;
+    height: calc(100vh - var(--nav-height));
     overflow-y: auto;
     padding: 0;
     border-right: 1px solid var(--border-light);
