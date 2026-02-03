@@ -65,9 +65,10 @@
   
   /* Spacing */
   --nav-height: 56px;
-  --sidebar-width: 256px;
-  --content-max-width: 768px;
-  --toc-width: 224px;
+  --sidebar-width: 240px;
+  --content-max-width: 640px;
+  --toc-width: 200px;
+  --docs-max-width: 1280px;
   
   /* Transitions */
   --transition-fast: 0.15s ease;

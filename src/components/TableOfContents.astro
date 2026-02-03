@@ -33,7 +33,7 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 <style>
   .toc {
     position: sticky;
-    top: 2rem;
+    top: 2.5rem;
     width: var(--toc-width);
     min-width: var(--toc-width);
     max-height: calc(100vh - 120px);
@@ -43,12 +43,12 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
   }
 
   .toc-title {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    color: var(--text-primary);
-    margin: 0 0 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-light);
+    color: var(--text-muted);
+    margin: 0 0 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .toc-list {
@@ -63,14 +63,14 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
   }
 
   .toc-item.depth-3 {
-    margin-left: 0.75rem;
+    margin-left: 0.625rem;
   }
 
   .toc-link {
     display: block;
-    padding: 0.4rem 0 0.4rem 1rem;
+    padding: 0.3rem 0 0.3rem 0.875rem;
     margin-left: -1px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
     text-decoration: none;
     border-left: 2px solid transparent;
@@ -90,7 +90,7 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 
   /* Scrollbar */
   .toc::-webkit-scrollbar {
-    width: 4px;
+    width: 3px;
   }
 
   .toc::-webkit-scrollbar-track {
@@ -102,7 +102,7 @@ const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
     border-radius: 2px;
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1100px) {
     .toc {
       display: none;
     }

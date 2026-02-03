@@ -51,46 +51,52 @@ if (pathParts.length >= 2) {
   </head>
   <body>
     <SiteNav />
-    <main class="docs-container">
-      <DocsSidebar />
-      <section class="docs-main">
-        <article class="docs-article">
-          <Breadcrumb items={breadcrumbItems} />
-          <header class="docs-header">
-            <h1>{frontmatter.title}</h1>
-            {frontmatter.description && (
-              <p class="docs-description">{frontmatter.description}</p>
-            )}
-          </header>
-          <div class="docs-content markdown-content">
-            <slot />
-          </div>
-        </article>
-        <TableOfContents headings={headings} />
-      </section>
-    </main>
+    <div class="docs-wrapper">
+      <main class="docs-container">
+        <DocsSidebar />
+        <section class="docs-main">
+          <article class="docs-article">
+            <Breadcrumb items={breadcrumbItems} />
+            <header class="docs-header">
+              <h1>{frontmatter.title}</h1>
+              {frontmatter.description && (
+                <p class="docs-description">{frontmatter.description}</p>
+              )}
+            </header>
+            <div class="docs-content markdown-content">
+              <slot />
+            </div>
+          </article>
+          <TableOfContents headings={headings} />
+        </section>
+      </main>
+    </div>
     <Footer />
   </body>
 </html>
 
 <style>
+  .docs-wrapper {
+    display: flex;
+    justify-content: center;
+    min-height: calc(100vh - var(--nav-height));
+    background: var(--bg-page);
+  }
+
   .docs-container {
     display: flex;
     width: 100%;
-    max-width: 100%;
+    max-width: var(--docs-max-width);
     margin: 0;
     padding: 0;
-    min-height: calc(100vh - var(--nav-height));
   }
 
   .docs-main {
     flex: 1;
     display: flex;
-    max-width: calc(var(--content-max-width) + var(--toc-width) + 4rem);
-    margin: 0 auto;
-    padding: 2rem 2rem 4rem;
-    gap: 3rem;
-    width: 100%;
+    padding: 2.5rem 3rem 4rem;
+    gap: 2.5rem;
+    min-width: 0;
   }
 
   .docs-article {
@@ -100,45 +106,46 @@ if (pathParts.length >= 2) {
   }
 
   .docs-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
     border-bottom: 1px solid var(--border-light);
   }
 
   .docs-header h1 {
-    font-size: 2rem;
+    font-size: 1.875rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin: 0 0 0.75rem;
-    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    line-height: 1.3;
     letter-spacing: -0.02em;
   }
 
   .docs-description {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: var(--text-muted);
     margin: 0;
     line-height: 1.6;
   }
 
   .docs-content {
-    font-size: 0.95rem;
-    line-height: 1.75;
+    font-size: 0.9375rem;
+    line-height: 1.7;
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1280px) {
     .docs-main {
+      padding: 2rem 2rem 3rem;
       gap: 2rem;
     }
   }
 
   @media (max-width: 1024px) {
     .docs-main {
-      padding: 1.5rem 1.25rem 3rem;
+      padding: 1.5rem 1.5rem 3rem;
     }
 
     .docs-header h1 {
-      font-size: 1.75rem;
+      font-size: 1.625rem;
     }
   }
 
