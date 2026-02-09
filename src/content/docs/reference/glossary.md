@@ -29,6 +29,10 @@ IME가 **아직 확정하지 않은 입력**을 처리하는 구간. “조합 �
 
 조합 **중 문자열이 바뀔 때** 발생하는 이벤트. **CompositionEvent.data** 에 **현재 조합 중인 문자열**(preedit)이 들어 있다.
 
+### 코드 포인트 (code point)
+
+유니코드에서 한 문자에 부여한 번호. 범위는 U+0000~U+10FFFF. 인코딩(UTF-8, UTF-16)과 구분된다. UTF-16에서는 BMP(U+0000~U+FFFF)는 코드 유닛 1개, 보조 평면(U+10000~U+10FFFF)은 서로게이트 쌍(코드 유닛 2개)으로 표현된다. 상세는 [유니코드 기본](/docs/reference/unicode-basics) 참고.
+
 ---
 
 ## E–I
@@ -72,6 +76,14 @@ Windows에서 IME와 앱이 연동하는 **프레임워크**. TSF 매니저·텍
 ### VK_PROCESSKEY / keyCode 229
 
 IME가 **키 입력을 처리 중**일 때 **keydown** 등에서 반환되는 키 코드. Windows에서는 **VK_PROCESSKEY**(229). Safari 등에서 **isComposing** 이 기대대로 동작하지 않을 때 **keyCode === 229** 로 “조합 중” 여부를 보완하는 fallback으로 쓴다.
+
+---
+
+## S
+
+### 서로게이트 쌍 (surrogate pair)
+
+UTF-16에서 U+10000~U+10FFFF를 표현하기 위해 사용하는 **두 개의 16비트 코드 유닛**. High surrogate(U+D800~U+DBFF) + Low surrogate(U+DC00~U+DFFF). JavaScript의 **String**은 코드 유닛 단위이므로, 보조 평면 문자 한 개가 **length** 2가 될 수 있다. 서로게이트를 반으로 쪼개면 깨진 문자가 나오므로, 커서·삭제·substring 시 코드 포인트 또는 그래핀 단위로 처리해야 한다. 상세는 [유니코드 기본](/docs/reference/unicode-basics) 참고.
 
 ---
 
