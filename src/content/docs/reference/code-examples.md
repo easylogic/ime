@@ -3,7 +3,7 @@ title: IME·한글 구현 코드 예시
 description: 웹 composition 처리, libhangul 사용, 완성형 계산 코드
 ---
 
-IME와 한글 입력을 실제로 다룰 때 참고할 **코드 예시**를 정리했다. 웹에서는 composition 이벤트만 처리하면 되고, 네이티브·임베디드에서는 libhangul 또는 직접 조합 로직을 쓸 수 있다.
+IME와 한글 입력을 실제로 다룰 때 참고할 **코드 예시**를 정리했다. 웹에서는 composition 이벤트만 처리하면 되고, 네이티브·임베디드에서는 libhangul 또는 직접 조합 로직을 쓸 수 있다. **에디터(contenteditable, React, ProseMirror/Slate/Lexical) 구현 예시**는 [에디터 IME 처리 코드 예시](/docs/editor/code-examples)를 참고한다.
 
 ---
 

@@ -121,7 +121,27 @@ editorEl.addEventListener('blur', () => {
 
 ---
 
-## 6. 디버깅 코드
+## 6. 한글 검색/비교가 안 된다 (파일명·붙여넣기)
+
+### 원인
+
+macOS에서는 파일 시스템·클립보드 등이 **NFD**(분해형) 정규화를 사용해, 한글이 **자소(초성·중성·종성)** 로 분리된 상태로 들어올 수 있다. NFC로 저장된 문자열과 **바이트가 달라** `===` 비교·검색이 실패한다.
+
+### 해결
+
+입력·붙여넣기·파일명 처리 시 **NFC**로 정규화한다.
+
+```javascript
+const normalized = input.normalize('NFC');
+```
+
+### 상세
+
+- [macOS 한글 자소 분리](/docs/reference/mac-hangul-decomposition) — NFC/NFD, 발생 조건, 감지·해결, IME·에디터 영향
+
+---
+
+## 7. 디버깅 코드
 
 문제 파악을 위해 아래 코드로 이벤트를 로깅한다:
 
@@ -142,7 +162,7 @@ el.addEventListener('keydown', e =>
 
 ---
 
-## 7. 테스트 매트릭스
+## 8. 테스트 매트릭스
 
 | OS | 브라우저 | 예상 동작 |
 |----|----------|-----------|
@@ -154,8 +174,9 @@ el.addEventListener('keydown', e =>
 
 ---
 
-## 8. 참고 문서
+## 9. 참고 문서
 
-- [에디터 IME 구현 가이드](/editor/implementation-notes/)
-- [브라우저·플랫폼별 IME 동작 차이](/reference/browser-platform-quirks/)
-- [composition 시나리오별 처리 규칙](/reference/composition-edge-cases/)
+- [에디터 IME 구현 가이드](/docs/editor/implementation-notes/)
+- [브라우저·플랫폼별 IME 동작 차이](/docs/reference/browser-platform-quirks/)
+- [composition 시나리오별 처리 규칙](/docs/reference/composition-edge-cases/)
+- [macOS 한글 자소 분리](/docs/reference/mac-hangul-decomposition/) — §6 한글 검색/비교
