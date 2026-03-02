@@ -3,6 +3,8 @@ title: 에디터 IME 처리 코드 예시
 description: contenteditable, React, ProseMirror/Slate/Lexical 구현 예시
 ---
 
+**웹 전반·libhangul·완성형 계산** 등은 [IME·한글 구현 코드 예시](/docs/reference/code-examples)를 참고한다.
+
 ---
 
 ## 1. contenteditable 기본 구현
