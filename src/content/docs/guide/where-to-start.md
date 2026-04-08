@@ -10,10 +10,11 @@ description: 역할별 문서 읽는 순서 — 구현자, QA, 한글 입력기 
 ## 에디터·입력 필드를 만드는 경우
 
 1. [에디터 IME 구현 가이드](/docs/editor/implementation-notes) — composition 이벤트 처리, 예외 케이스, 완전한 구현
-2. [구현 체크리스트](/docs/editor/implementation-checklist) — IME 쪽 구현이 빠지지 않았는지 점검
-3. [음성 입력·딕테이션과 입력 경로](/docs/reference/voice-dictation-input) — 키보드 IME 외 경로(insertText만 오는 경우)
-4. [트러블슈팅](/docs/reference/troubleshooting) — 증상별 원인·해결
-5. 문제 발생 시 [브라우저·플랫폼별 IME 동작 차이](/docs/reference/browser-platform-quirks)
+2. [네이티브·WASM 코어와 IME](/docs/editor/native-wasm-ime) — Rust/WASM 문서 모델과 웹 IME 경계, 숨은 입력, EditContext
+3. [구현 체크리스트](/docs/editor/implementation-checklist) — IME 쪽 구현이 빠지지 않았는지 점검
+4. [음성 입력·딕테이션과 입력 경로](/docs/reference/voice-dictation-input) — 키보드 IME 외 경로(insertText만 오는 경우)
+5. [트러블슈팅](/docs/reference/troubleshooting) — 증상별 원인·해결
+6. 문제 발생 시 [브라우저·플랫폼별 IME 동작 차이](/docs/reference/browser-platform-quirks)
 
 ---
 

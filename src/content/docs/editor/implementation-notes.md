@@ -467,6 +467,7 @@ class CompleteIMEHandler {
 
 ## 8. 참고 문서
 
+- [네이티브·WASM 코어와 IME](/docs/editor/native-wasm-ime) — Rust/WASM 문서 모델, 숨은 입력·EditContext, JS/WASM 경계
 - [브라우저·플랫폼별 IME 동작 차이](/reference/browser-platform-quirks/)
 - [composition 이벤트 시나리오별 처리 규칙](/reference/composition-edge-cases/)
 - [inputType 상세](/reference/inputtype/)
