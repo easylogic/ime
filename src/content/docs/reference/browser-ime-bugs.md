@@ -17,7 +17,7 @@ IME 관련 **알려진 브라우저 버그**를 버그 ID와 함께 정리했다
 | **상태** | OPEN (2026-02 기준 미해결) |
 | **영향** | iOS Safari. 딕테이션(음성 입력) 시 compositionstart/update/end **발생하지 않음**. input(insertText)만 옴. |
 | **회피** | `!isComposing && e.inputType === 'insertText'` 시 **e.data**를 바로 commit. [트러블슈팅 §2](/docs/reference/troubleshooting), [composition 시나리오](/docs/reference/composition-edge-cases) §4. |
-| **관련** | [브라우저·플랫폼별 차이 §1.1](/docs/reference/browser-platform-quirks) |
+| **관련** | [브라우저·플랫폼별 차이 §1.1](/docs/reference/browser-platform-quirks), [음성 입력·딕테이션과 입력 경로](/docs/reference/voice-dictation-input) |
 
 ### 1.2 Bug 165004 — keydown과 composition 이벤트 순서
 
