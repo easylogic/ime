@@ -11,8 +11,9 @@ description: 역할별 문서 읽는 순서 — 구현자, QA, 한글 입력기 
 
 1. [에디터 IME 구현 가이드](/docs/editor/implementation-notes) — composition 이벤트 처리, 예외 케이스, 완전한 구현
 2. [구현 체크리스트](/docs/editor/implementation-checklist) — IME 쪽 구현이 빠지지 않았는지 점검
-3. [트러블슈팅](/docs/reference/troubleshooting) — 증상별 원인·해결
-4. 문제 발생 시 [브라우저·플랫폼별 IME 동작 차이](/docs/reference/browser-platform-quirks)
+3. [음성 입력·딕테이션과 입력 경로](/docs/reference/voice-dictation-input) — 키보드 IME 외 경로(insertText만 오는 경우)
+4. [트러블슈팅](/docs/reference/troubleshooting) — 증상별 원인·해결
+5. 문제 발생 시 [브라우저·플랫폼별 IME 동작 차이](/docs/reference/browser-platform-quirks)
 
 ---
 
@@ -30,6 +31,15 @@ description: 역할별 문서 읽는 순서 — 구현자, QA, 한글 입력기 
 2. [한글 입력기 구현](/docs/korean/implementation) — 상태 머신, JavaScript 구현
 3. [libhangul API](/docs/korean/libhangul-api) — C 라이브러리 사용 시
 4. [2벌식·3벌식 알고리즘](/docs/korean/2-set-algorithm), [3벌식](/docs/korean/3-set-algorithm)
+
+---
+
+## 베트남어·태국어·인도계 — 조합·입력기 구현
+
+1. **베트남어**: [조합 원리](/docs/vietnamese/combination) → [입력기](/docs/vietnamese/input-methods) → [입력기 구현](/docs/vietnamese/implementation)
+2. **태국어**: [조합 원리](/docs/thai/combination) → [입력기](/docs/thai/input-methods) → [입력기 구현](/docs/thai/implementation)
+3. **인도계 문자**: [조합 원리](/docs/indic/combination) → [입력기](/docs/indic/input-methods) → [입력기 구현](/docs/indic/implementation)
+4. **티베트·미얀마·전통 몽골** 등: [기타 문자계 개요](/docs/reference/other-scripts-overview), [티베트·미얀마·몽골 문자](/docs/reference/tibetan-myanmar-mongol)
 
 ---
 
